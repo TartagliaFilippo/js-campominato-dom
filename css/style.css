@@ -1,0 +1,43 @@
+/* GENERICS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* UTILS */
+
+/* STRUCTURE */
+#grid {
+  width: 1000px;
+  height: 1000px;
+  background-color: red;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ten {
+  width: 10%;
+  aspect-ratio: 1;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nine {
+  width: calc(100% / 9);
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.seven {
+  width: calc(100% / 7);
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.color-click {
+  background-color: aqua;
+}
