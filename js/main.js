@@ -4,24 +4,51 @@ const gridElement = document.getElementById("grid");
 // collego il bottone a un evento
 const buttonGrid = document.getElementById("generate-grid");
 
+// collego il select
+const difficultySelect = document.getElementById("difficulty-select");
+
 buttonGrid.addEventListener("click", function () {
-  getGenerateGrid();
+  const difficulty = difficultySelect.value;
+  getGenerateGrid(difficulty);
 });
 
-function getGenerateGrid() {
-  // variabile cella inserita in un ciclo for
-  for (let i = 1; i <= 100; i++) {
-    const cell = createCell(i);
-    // stampo la cella
-    gridElement.append(cell);
+function getGenerateGrid(difficulty) {
+  if (difficulty == "1") {
+    // variabile cella inserita in un ciclo for
+    for (let i = 1; i <= 100; i++) {
+      const cell = createCell(i, difficulty);
+      // stampo la cella
+      gridElement.append(cell);
+    }
+  } else if (difficulty == "2") {
+    // variabile cella inserita in un ciclo for
+    for (let i = 1; i <= 81; i++) {
+      const cell = createCell(i, difficulty);
+      // stampo la cella
+      gridElement.append(cell);
+    }
+  } else if (difficulty == "3") {
+    // variabile cella inserita in un ciclo for
+    for (let i = 1; i <= 49; i++) {
+      const cell = createCell(i, difficulty);
+      // stampo la cella
+      gridElement.append(cell);
+    }
   }
 }
 
 // funzione che genera celle
-function createCell(i) {
+function createCell(i, difficulty) {
   // creo la mia cella
   const cell = document.createElement("div");
-  cell.classList.add("ten");
+  if (difficulty == "1") {
+    cell.classList.add("cell", "ten");
+  } else if (difficulty == "2") {
+    cell.classList.add("cell", "nine");
+  } else if (difficulty == "3") {
+    cell.classList.add("cell", "seven");
+  }
+
   cell.innerHTML = i;
 
   // stabilisco un evento al click della cella
