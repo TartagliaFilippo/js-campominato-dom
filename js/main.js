@@ -54,13 +54,14 @@ function getRandomNumber(min, max) {
   return randomNumber;
 }
 
-// collego il contenitore della griglia
+// elementi del dom
+// contenitore griglia
 const gridElement = document.getElementById("grid");
 
-// collego il bottone a un evento
+// bottone genera griglia
 const buttonGrid = document.getElementById("generate-grid");
 
-// collego il select
+// select della difficoltà
 const difficultySelect = document.getElementById("difficulty-select");
 
 buttonGrid.addEventListener("click", function () {
@@ -69,3 +70,15 @@ buttonGrid.addEventListener("click", function () {
 
   getGenerateGrid(totalCell);
 });
+
+// generatore di array con numeri unici
+function generateBombs(min, max, qty) {
+  const uniqueArray = [];
+
+  while (uniqueArray.length < qty) {
+    const uniqueNumber = getRandomNumber(min, max);
+    if (!uniqueArray.includes(uniqueNumber)) uniqueArray.push(uniqueNumber);
+  }
+
+  return uniqueArray;
+}
