@@ -1,45 +1,17 @@
 /**
- * funzione che genera la griglia
- * @param {difficoltà} difficulty
- */
-function getGenerateGrid(difficulty) {
-  if (difficulty == "1") {
-    // variabile cella inserita in un ciclo for
-    for (let i = 1; i <= 100; i++) {
-      const cell = createCell(i, difficulty);
-      // stampo la cella
-      gridElement.append(cell);
-    }
-  } else if (difficulty == "2") {
-    // variabile cella inserita in un ciclo for
-    for (let i = 1; i <= 81; i++) {
-      const cell = createCell(i, difficulty);
-      // stampo la cella
-      gridElement.append(cell);
-    }
-  } else if (difficulty == "3") {
-    // variabile cella inserita in un ciclo for
-    for (let i = 1; i <= 49; i++) {
-      const cell = createCell(i, difficulty);
-      // stampo la cella
-      gridElement.append(cell);
-    }
-  }
-}
-/**
- * funzione che genera le celle
+ * !funzione che genera le celle
  * @param {indice} i
- * @param {difficoltà} difficulty
+ * @param {celleTotali} totalCell
  * @returns cella
  */
-function createCell(i, difficulty) {
+function createCell(i, totalCell) {
   // creo la mia cella
   const cell = document.createElement("div");
-  if (difficulty == "1") {
+  if (totalCell == "100") {
     cell.classList.add("cell", "ten");
-  } else if (difficulty == "2") {
+  } else if (totalCell == "81") {
     cell.classList.add("cell", "nine");
-  } else if (difficulty == "3") {
+  } else if (totalCell == "49") {
     cell.classList.add("cell", "seven");
   }
 
@@ -56,7 +28,23 @@ function createCell(i, difficulty) {
 }
 
 /**
- * funzione che genera numeri random
+ * !funzione che genera la griglia
+ * @param {celle totali} totalCell
+ */
+function getGenerateGrid(totalCell) {
+  // reset per la nuova partita
+  gridElement.innerHTML = "";
+
+  // variabile cella inserita in un ciclo for
+  for (let i = 1; i <= totalCell; i++) {
+    const cell = createCell(i, totalCell);
+    // stampo la cella
+    gridElement.append(cell);
+  }
+}
+
+/**
+ * !funzione che genera numeri random
  * @param {min} numero minimo del range
  * @param {max} numero massimo del range
  * @returns numero
@@ -65,14 +53,6 @@ function getRandomNumber(min, max) {
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNumber;
 }
-
-// utilizzo la funzione getRandomNumber per ottenere le mie bombe
-
-const randomNumber = getRandomNumber(1, 16);
-console.log(randomNumber);
-
-// creo la mia black list
-const blackList = [];
 
 // collego il contenitore della griglia
 const gridElement = document.getElementById("grid");
@@ -84,6 +64,8 @@ const buttonGrid = document.getElementById("generate-grid");
 const difficultySelect = document.getElementById("difficulty-select");
 
 buttonGrid.addEventListener("click", function () {
-  const difficulty = difficultySelect.value;
-  getGenerateGrid(difficulty);
+  // variabile che definisce il mio numero di celle
+  const totalCell = parseInt(difficultySelect.value);
+
+  getGenerateGrid(totalCell);
 });

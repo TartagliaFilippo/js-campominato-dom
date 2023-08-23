@@ -21,7 +21,7 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 ## SVOLGIMENTO
 
 - inserisco una _black list_ a cui fare riferimento
-- creo una funzione che genera numeri casuali **random nunmber**
+- creo una funzione che genera numeri casuali **random number**
 - i numeri casuali non devono essere presenti nella _black list_ mano a mano che vengono inseriti nelle celle
 - utilizzando la funzione _random number_ creo 16 numeri corrispondenti alle bombe
 - i numeri che saranno nella lista bombe quando cliccati, daranno un colore diverso da quello standard
