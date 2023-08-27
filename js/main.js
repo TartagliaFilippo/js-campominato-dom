@@ -81,12 +81,18 @@ const buttonGrid = document.getElementById("generate-grid");
 // select della difficoltà
 const difficultySelect = document.getElementById("difficulty-select");
 
+// variabile che definisce il mio numero di celle
+const totalCell = parseInt(difficultySelect.value);
+
 // punteggio
 let score = 0;
 
-buttonGrid.addEventListener("click", function () {
-  // variabile che definisce il mio numero di celle
-  const totalCell = parseInt(difficultySelect.value);
+// valorizzo le bombe
+const bombsArray = generateBombs(1, totalCell, 16);
 
+// valorizzo le celle libere
+let freeCells = totalCell - bombsArray.length;
+
+buttonGrid.addEventListener("click", function () {
   getGenerateGrid(totalCell);
 });
