@@ -45,13 +45,30 @@ function getGenerateGrid(totalCell) {
 
 /**
  * !funzione che genera numeri random
- * @param {min} numero minimo del range
- * @param {max} numero massimo del range
- * @returns numero
+ * @param {number} min minimo del range
+ * @param {number} max massimo del range
+ * @returns {number}
  */
 function getRandomNumber(min, max) {
   const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
   return randomNumber;
+}
+/**
+ * !funzione che genera array con numeri unici
+ * @param {number} min
+ * @param {number} max
+ * @param {number} qty
+ * @returns
+ */
+function generateBombs(min, max, qty) {
+  const uniqueArray = [];
+
+  while (uniqueArray.length < qty) {
+    const uniqueNumber = getRandomNumber(min, max);
+    if (!uniqueArray.includes(uniqueNumber)) uniqueArray.push(uniqueNumber);
+  }
+
+  return uniqueArray;
 }
 
 // elementi del dom
@@ -64,21 +81,12 @@ const buttonGrid = document.getElementById("generate-grid");
 // select della difficoltà
 const difficultySelect = document.getElementById("difficulty-select");
 
+// punteggio
+let score = 0;
+
 buttonGrid.addEventListener("click", function () {
   // variabile che definisce il mio numero di celle
   const totalCell = parseInt(difficultySelect.value);
 
   getGenerateGrid(totalCell);
 });
-
-// generatore di array con numeri unici
-function generateBombs(min, max, qty) {
-  const uniqueArray = [];
-
-  while (uniqueArray.length < qty) {
-    const uniqueNumber = getRandomNumber(min, max);
-    if (!uniqueArray.includes(uniqueNumber)) uniqueArray.push(uniqueNumber);
-  }
-
-  return uniqueArray;
-}
