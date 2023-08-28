@@ -4,7 +4,7 @@
  * @param {celleTotali} totalCell
  * @returns cella
  */
-function createCell(i, totalCell) {
+function createCell(i, totalCell, bombsArray) {
   // creo la mia cella
   const cell = document.createElement("div");
   if (totalCell == "100") {
@@ -19,11 +19,28 @@ function createCell(i, totalCell) {
 
   // stabilisco un evento al click della cella
   cell.addEventListener("click", function () {
-    // aggiungo la classe colore
-    cell.classList.add("color-click");
-    console.log(i);
-  });
+    // parso il numero della cella
+    const cellNumber = parseInt(cell.innerHTML);
 
+    bombsArray = generateBombs(1, totalCell, 16);
+
+    // determino il click della bomba
+    if (bombsArray.includes(cellNumber)) {
+      // click della bomba
+      this.classList.add("bomb");
+      // end-game al click della bomba
+      endgame("Fine partita. Hai totalizzato " + score + " punti");
+    } else {
+      // click cella libera
+      this.classList.add("color-click");
+      score++;
+
+      // cliccate tutte le celle finisco il gioco
+      if (score >= freeCells) {
+        endgame("Fine partita. Hai totalizzato " + score + " punti.");
+      }
+    }
+  });
   return cell;
 }
 
@@ -71,6 +88,18 @@ function generateBombs(min, max, qty) {
   return uniqueArray;
 }
 
+/**
+ * ! funzione endgame
+ */
+
+const endgame = (msg) => {
+  // stampo il punteggio
+  alert(msg);
+
+  // * Superbonus 1 - evito che si possa cliccare su altre celle.
+  gameOver = true;
+};
+
 // elementi del dom
 // contenitore griglia
 const gridElement = document.getElementById("grid");
@@ -81,18 +110,27 @@ const buttonGrid = document.getElementById("generate-grid");
 // select della difficoltà
 const difficultySelect = document.getElementById("difficulty-select");
 
-// variabile che definisce il mio numero di celle
-const totalCell = parseInt(difficultySelect.value);
-
 // punteggio
 let score = 0;
 
-// valorizzo le bombe
-const bombsArray = generateBombs(1, totalCell, 16);
+// celle libere
+let freeCells;
 
-// valorizzo le celle libere
-let freeCells = totalCell - bombsArray.length;
+// variabile game over
+let gameOver;
 
 buttonGrid.addEventListener("click", function () {
+  // variabile che definisce il mio numero di celle
+  const totalCell = parseInt(difficultySelect.value);
+
+  // valorizzo le bombe
+  let bombsArray = generateBombs(1, totalCell, 16);
+
+  // valorizzo le celle libere
+  freeCells = totalCell - bombsArray.length;
+
+  // dichiaro la variabile gameover
+  gameOver = false;
+
   getGenerateGrid(totalCell);
 });
